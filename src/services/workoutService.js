@@ -1,3 +1,5 @@
+const FETCH_WO_URL = "http://127.0.0.1:5000/workouts";
+
 async function fetchWorkouts() {
   const response = await fetch(FETCH_WO_URL);
   if (!response.ok) {
@@ -7,8 +9,11 @@ async function fetchWorkouts() {
 }
 
 async function createWorkout(data) {
-  const response = await fetch(CREATE_WO_URL, {
+  const response = await fetch(FETCH_WO_URL, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   });
   if (!response.ok) {
