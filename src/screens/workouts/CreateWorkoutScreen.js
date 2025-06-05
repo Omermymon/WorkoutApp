@@ -1,71 +1,84 @@
 import { useState } from "react";
-import { View, TextInput } from "react-native";
-import { useDispatch } from "react-redux";
+import { View, FlatList } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { start } from "../../store/excerciseSlice";
+import { resetWorkout } from "../../store/workoutSlice";
 import { Button, Menu, Provider, Text } from "react-native-paper";
-import exercises from "../../utils/workoutList";
+import exercisesList from "../../utils/workoutList";
+import { useCreateWorkout } from "../../hooks/useWorkouts";
 
 export default function CreateWorkoutScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState("");
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+  const workoutState = useSelector((state) => state.workout);
+  const mutation = useCreateWorkout();
+
+  const handleCreateExercise = () => {
+    dispatch(start(selected));
+    navigation.navigate("CreateExcercise");
+  };
+
+  const handleSubmitFullWorkout = () => {
+    if (workoutState.exercises.length === 0) return;
+    mutation.mutate({
+      date: new Date().toISOString(),
+      exercises: workoutState.exercises,
+    });
+    dispatch(resetWorkout());
+    setSelected("");
+    navigation.navigate("WorkoutList");
+  };
 
   return (
     <Provider>
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, gap: 12 }}>
         <Menu
           visible={visible}
-          onDismiss={closeMenu}
+          onDismiss={() => setVisible(false)}
           anchor={
-            <Button mode="outlined" onPress={openMenu}>
+            <Button mode="outlined" onPress={() => setVisible(true)}>
               {selected || "Select Exercise"}
             </Button>
           }
         >
-          {exercises.map((item, index) => (
+          {exercisesList.map((item, index) => (
             <Menu.Item
               key={index}
               onPress={() => {
                 setSelected(item);
-                closeMenu();
+                setVisible(false);
               }}
               title={item}
             />
           ))}
         </Menu>
+
         {selected ? (
-          <Text style={{ marginTop: 10 }}>Selected: {selected}</Text>
+          <Button mode="contained" onPress={handleCreateExercise}>
+            Choose sets and reps
+          </Button>
         ) : null}
+
+        {workoutState.exercises.length > 0 && (
+          <>
+            <Text variant="titleMedium">Added Exercises:</Text>
+            <FlatList
+              data={workoutState.exercises}
+              keyExtractor={(_, i) => i.toString()}
+              renderItem={({ item }) => (
+                <Text>
+                  {item.exercise}: {item.sets}x{item.reps} @ {item.weight}kg
+                </Text>
+              )}
+            />
+            <Button mode="contained" onPress={handleSubmitFullWorkout}>
+              Save Workout
+            </Button>
+          </>
+        )}
       </View>
     </Provider>
   );
 }
-
-//   const [selectedExercise, setSelectedExercise] = useState("");
-//   const dispatch = useDispatch();
-
-//   const handleCreateExcercise = () => {
-//     dispatch(start(selectedExercise));
-//     navigation.navigate("CreateExcercise");
-//   };
-
-//   return (
-//     <View style={{ padding: 20 }}>
-//       <Picker
-//         selectedValue={selectedExercise}
-//         onValueChange={(itemValue) => setSelectedExercise(itemValue)}
-//       >
-//         <Picker.Item label="Choose an exercise..." value="" />
-//         {exercises.map((type, index) => (
-//           <Picker.Item key={index} label={type} value={type} />
-//         ))}
-//       </Picker>
-//       <Button
-//         title="Choose sets and reps"
-//         onPress={handleCreateExcercise}
-//       ></Button>
-//     </View>
-//   );
-// }

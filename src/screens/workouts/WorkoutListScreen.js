@@ -1,6 +1,6 @@
 import { useWorkouts } from "../../hooks/useWorkouts";
 import { View } from "react-native";
-import { Button, Menu, Provider, Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 function WorkoutListScreen({ navigation }) {
   const { data, isLoading, error } = useWorkouts();
 
@@ -10,7 +10,7 @@ function WorkoutListScreen({ navigation }) {
   return (
     <View style={{ padding: 20 }}>
       {data.map((workout) => (
-        <Text key={workout.id}>{workout.exercise}</Text>
+        <Text key={workout.id}>{workout.date}</Text>
       ))}
       <Button
         title="Create New Workout"

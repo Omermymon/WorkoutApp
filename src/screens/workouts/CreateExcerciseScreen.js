@@ -1,17 +1,22 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
-import { useCreateWorkout } from "../../hooks/useWorkouts";
-import { useSelector } from "react-redux";
+import { View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, TextInput } from "react-native-paper";
+import { addExercise } from "../../store/workoutSlice";
 
 export default function CreateExcerciseScreen({ navigation }) {
   const reduxExercise = useSelector((state) => state.excercise.exercise);
+  const dispatch = useDispatch();
   const [workoutData, setWorkoutData] = useState({
     reps: "",
     sets: "",
     weight: "",
   });
 
-  const mutation = useCreateWorkout();
+  const handleSubmitExercise = () => {
+    dispatch(addExercise({ ...workoutData, exercise: reduxExercise }));
+    navigation.navigate("CreateWorkout");
+  };
 
   return (
     <View style={{ padding: 20 }}>
@@ -39,19 +44,9 @@ export default function CreateExcerciseScreen({ navigation }) {
         style={{ marginBottom: 10, borderWidth: 1, padding: 8 }}
       />
 
-      <Button
-        title={mutation.isLoading ? "Saving..." : "Save Workout"}
-        onPress={() =>
-          mutation.mutate({ ...workoutData, exercise: reduxExercise })
-        }
-        disabled={mutation.isLoading}
-      />
-
-      {mutation.isError && (
-        <Text style={{ color: "red", marginTop: 10 }}>
-          Error saving workout
-        </Text>
-      )}
+      <Button title="Add Exercise" onPress={handleSubmitExercise}>
+        add Exercise
+      </Button>
     </View>
   );
 }
