@@ -6,6 +6,7 @@ import { resetWorkout } from "../../store/workoutSlice";
 import { Button, Menu, Provider, Text } from "react-native-paper";
 import exercisesList from "../../utils/workoutList";
 import { useCreateWorkout } from "../../hooks/useWorkouts";
+import AppButton from "../../components/ui/AppButton";
 
 export default function CreateWorkoutScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -38,9 +39,9 @@ export default function CreateWorkoutScreen({ navigation }) {
           visible={visible}
           onDismiss={() => setVisible(false)}
           anchor={
-            <Button mode="outlined" onPress={() => setVisible(true)}>
+            <AppButton mode="contained" onPress={() => setVisible(true)}>
               {selected || "Select Exercise"}
-            </Button>
+            </AppButton>
           }
         >
           {exercisesList.map((item, index) => (
@@ -56,9 +57,9 @@ export default function CreateWorkoutScreen({ navigation }) {
         </Menu>
 
         {selected ? (
-          <Button mode="contained" onPress={handleCreateExercise}>
+          <AppButton mode="contained" onPress={handleCreateExercise}>
             Choose sets and reps
-          </Button>
+          </AppButton>
         ) : null}
 
         {workoutState.exercises.length > 0 && (
@@ -73,9 +74,9 @@ export default function CreateWorkoutScreen({ navigation }) {
                 </Text>
               )}
             />
-            <Button mode="contained" onPress={handleSubmitFullWorkout}>
+            <AppButton mode="contained" onPress={handleSubmitFullWorkout}>
               Save Workout
-            </Button>
+            </AppButton>
           </>
         )}
       </View>
