@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextInput } from "react-native-paper";
 import { addExercise } from "../../store/workoutSlice";
 import AppButton from "../../components/ui/AppButton";
 import AppInput from "../../components/ui/AppInput";

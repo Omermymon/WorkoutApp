@@ -11,7 +11,9 @@ function WorkoutListScreen({ navigation }) {
   return (
     <View style={{ padding: 20 }}>
       {data.map((workout) => (
-        <AppText key={workout.id}>{workout.date}</AppText>
+        <AppButton lighter={true} key={workout.id}>
+          {workout.date}
+        </AppButton>
       ))}
       <AppButton
         title="Create New Workout"

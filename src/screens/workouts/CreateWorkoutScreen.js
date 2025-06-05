@@ -3,10 +3,11 @@ import { View, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { start } from "../../store/excerciseSlice";
 import { resetWorkout } from "../../store/workoutSlice";
-import { Button, Menu, Provider, Text } from "react-native-paper";
+import { Menu, Provider, Text } from "react-native-paper";
 import exercisesList from "../../utils/workoutList";
 import { useCreateWorkout } from "../../hooks/useWorkouts";
 import AppButton from "../../components/ui/AppButton";
+import AppText from "../../components/ui/AppText";
 
 export default function CreateWorkoutScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default function CreateWorkoutScreen({ navigation }) {
 
   return (
     <Provider>
-      <View style={{ padding: 20, gap: 12 }}>
+      <View style={{ padding: 20 }}>
         <Menu
           visible={visible}
           onDismiss={() => setVisible(false)}
@@ -64,14 +65,14 @@ export default function CreateWorkoutScreen({ navigation }) {
 
         {workoutState.exercises.length > 0 && (
           <>
-            <Text variant="titleMedium">Added Exercises:</Text>
+            <AppText variant="titleMedium">Added Exercises:</AppText>
             <FlatList
               data={workoutState.exercises}
               keyExtractor={(_, i) => i.toString()}
               renderItem={({ item }) => (
-                <Text>
+                <AppText>
                   {item.exercise}: {item.sets}x{item.reps} @ {item.weight}kg
-                </Text>
+                </AppText>
               )}
             />
             <AppButton mode="contained" onPress={handleSubmitFullWorkout}>
