@@ -1,0 +1,23 @@
+const exercises = [
+  "Push-Ups",
+  "Pull-Ups",
+  "Squats",
+  "Lunges",
+  "Bench Press",
+  "Deadlift",
+  "Shoulder Press",
+  "Bicep Curls",
+  "Tricep Dips",
+  "Plank",
+  "Leg Press",
+  "Chest Press (Machine)",
+  "Lat Pulldown",
+  "Cable Rows",
+  "Leg Curl",
+  "Seated Row Machine",
+  "Crunches",
+  "Russian Twists",
+  "Mountain Climbers",
+  "Jumping Jacks",
+];
+export default exercises;

@@ -1,5 +1,6 @@
 import { useWorkouts } from "../../hooks/useWorkouts";
-import { Text, View, Button } from "react-native";
+import { View } from "react-native";
+import { Button, Menu, Provider, Text } from "react-native-paper";
 function WorkoutListScreen({ navigation }) {
   const { data, isLoading, error } = useWorkouts();
 
@@ -7,14 +8,17 @@ function WorkoutListScreen({ navigation }) {
   if (error) return <Text>Error fetching workouts</Text>;
 
   return (
-    <View>
+    <View style={{ padding: 20 }}>
       {data.map((workout) => (
-        <Text key={workout.id}>{workout.reps}</Text>
+        <Text key={workout.id}>{workout.exercise}</Text>
       ))}
       <Button
         title="Create New Workout"
         onPress={() => navigation.navigate("CreateWorkout")}
-      />
+        mode="outlined"
+      >
+        Create New Workout
+      </Button>
     </View>
   );
 }
