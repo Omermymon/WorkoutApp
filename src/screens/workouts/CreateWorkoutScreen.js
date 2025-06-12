@@ -24,8 +24,13 @@ export default function CreateWorkoutScreen({ navigation }) {
 
   const handleSubmitFullWorkout = () => {
     if (workoutState.exercises.length === 0) return;
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(new Date());
     mutation.mutate({
-      date: new Date().toISOString(),
+      date: formattedDate,
       exercises: workoutState.exercises,
     });
     dispatch(resetWorkout());

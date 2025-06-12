@@ -1,7 +1,7 @@
 import { useWorkoutsById } from "../../hooks/useWorkouts";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
-import AppText from "../../components/ui/AppText";
+import AppCard from "../../components/ui/AppCard";
 
 function WorkoutDetailScreen({ navigation, route }) {
   const { id } = route.params;
@@ -13,7 +13,9 @@ function WorkoutDetailScreen({ navigation, route }) {
   return (
     <View style={{ padding: 20 }}>
       {exercises.map((excercise) => (
-        <AppText key={excercise.exercise}>{excercise.exercise}</AppText>
+        <AppCard {...excercise} key={excercise.exercise}>
+          {excercise.exercise}
+        </AppCard>
       ))}
     </View>
   );
