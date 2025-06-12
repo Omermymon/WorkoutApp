@@ -1,8 +1,8 @@
 import { useWorkouts } from "../../hooks/useWorkouts";
 import { View } from "react-native";
-import { Button, Text, useTheme } from "react-native-paper";
-import AppText from "../../components/ui/AppText";
+import { Text } from "react-native-paper";
 import AppButton from "../../components/ui/AppButton";
+
 function WorkoutListScreen({ navigation }) {
   const { data, isLoading, error } = useWorkouts();
   if (isLoading) return <Text>Loading...</Text>;
@@ -11,7 +11,13 @@ function WorkoutListScreen({ navigation }) {
   return (
     <View style={{ padding: 20 }}>
       {data.map((workout) => (
-        <AppButton lighter={true} key={workout.id}>
+        <AppButton
+          lighter={true}
+          key={workout.id}
+          onPress={() =>
+            navigation.navigate("WorkoutDetail", { id: workout.id })
+          }
+        >
           {workout.date}
         </AppButton>
       ))}

@@ -8,6 +8,7 @@ import WorkoutListScreen from "./src/screens/workouts/WorkoutListScreen";
 import CreateWorkoutScreen from "./src/screens/workouts/CreateWorkoutScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreateExcerciseScreen from "./src/screens/workouts/CreateExcerciseScreen";
+import WorkoutDetailScreen from "./src/screens/workouts/WorkoutDetailScreen";
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,10 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="WorkoutList" component={WorkoutListScreen} />
+            <Stack.Screen
+              name="WorkoutDetail"
+              component={WorkoutDetailScreen}
+            />
             <Stack.Screen
               name="CreateWorkout"
               component={CreateWorkoutScreen}

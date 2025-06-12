@@ -8,6 +8,14 @@ async function fetchWorkouts() {
   return response.json();
 }
 
+async function fetchWorkoutId(id) {
+  const response = await fetch(FETCH_WO_URL + "/" + id);
+  if (!response.ok) {
+    console.log("failed to fetch workout");
+  }
+  return response.json();
+}
+
 async function createWorkout(data) {
   const response = await fetch(FETCH_WO_URL, {
     method: "POST",
@@ -22,4 +30,4 @@ async function createWorkout(data) {
   return response.json();
 }
 
-export { fetchWorkouts, createWorkout };
+export { fetchWorkouts, createWorkout, fetchWorkoutId };
