@@ -8,6 +8,7 @@ import exercisesList from "../../utils/workoutList";
 import { useCreateWorkout } from "../../hooks/useWorkouts";
 import AppButton from "../../components/ui/AppButton";
 import AppText from "../../components/ui/AppText";
+import { Card } from "react-native-paper";
 
 export default function CreateWorkoutScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -75,9 +76,14 @@ export default function CreateWorkoutScreen({ navigation }) {
               data={workoutState.exercises}
               keyExtractor={(_, i) => i.toString()}
               renderItem={({ item }) => (
-                <AppText>
-                  {item.exercise}: {item.sets}x{item.reps} @ {item.weight}kg
-                </AppText>
+                <Card style={{ marginBottom: 10 }}>
+                  <Card.Content>
+                    <Text variant="titleMedium">{item.exercise}</Text>
+                    <Text variant="bodyMedium">
+                      {item.sets} sets x {item.reps} reps @ {item.weight} kg
+                    </Text>
+                  </Card.Content>
+                </Card>
               )}
             />
             <AppButton mode="contained" onPress={handleSubmitFullWorkout}>

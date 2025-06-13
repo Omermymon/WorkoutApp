@@ -1,5 +1,5 @@
 import { useWorkouts } from "../../hooks/useWorkouts";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import AppButton from "../../components/ui/AppButton";
 
@@ -8,8 +8,14 @@ function WorkoutListScreen({ navigation }) {
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error fetching workouts</Text>;
 
+  const totalWorkouts = data.length;
+
   return (
-    <View style={{ padding: 20 }}>
+    <ScrollView style={{ padding: 20 }}>
+      <View style={{ marginBottom: 20 }}>
+        <Text variant="headlineMedium">Workout Summary</Text>
+        <Text>Total Workouts: {totalWorkouts}</Text>
+      </View>
       {data.map((workout) => (
         <AppButton
           lighter={true}
@@ -28,7 +34,7 @@ function WorkoutListScreen({ navigation }) {
       >
         Create New Workout
       </AppButton>
-    </View>
+    </ScrollView>
   );
 }
 

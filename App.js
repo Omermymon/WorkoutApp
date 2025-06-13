@@ -19,18 +19,25 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="WorkoutList" component={WorkoutListScreen} />
+            <Stack.Screen
+              name="WorkoutList"
+              component={WorkoutListScreen}
+              options={{ title: "Workout List" }}
+            />
             <Stack.Screen
               name="WorkoutDetail"
               component={WorkoutDetailScreen}
+              options={{ title: "My Workout" }}
             />
             <Stack.Screen
               name="CreateWorkout"
               component={CreateWorkoutScreen}
+              options={{ title: "Create new workout" }}
             />
             <Stack.Screen
               name="CreateExcercise"
               component={CreateExcerciseScreen}
+              options={{ title: "Create new exercise" }}
             />
           </Stack.Navigator>
         </NavigationContainer>

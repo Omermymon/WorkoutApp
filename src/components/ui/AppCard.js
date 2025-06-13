@@ -4,7 +4,17 @@ export default function AppCard({ style, weight, sets, reps, exercise }) {
   const theme = useTheme();
 
   return (
-    <Card style={[{ borderRadius: 8, padding: 4, margin: 10 }, style]}>
+    <Card
+      style={[
+        {
+          borderRadius: 8,
+          padding: 4,
+          margin: 10,
+          backgroundColor: theme.colors.elevation.level1,
+        },
+        style,
+      ]}
+    >
       <Card.Title title={exercise} />
       <Card.Content>
         <Text variant="bodyMedium">Weight: {weight}</Text>

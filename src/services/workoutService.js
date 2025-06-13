@@ -1,4 +1,4 @@
-const FETCH_WO_URL = "http://127.0.0.1:5000/workouts";
+const FETCH_WO_URL = "http://192.168.1.44:5000/workouts";
 
 async function fetchWorkouts() {
   const response = await fetch(FETCH_WO_URL);
